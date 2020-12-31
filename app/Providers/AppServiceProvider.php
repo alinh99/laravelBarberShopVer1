@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Providers;
-
+use App\Cart;
 use Illuminate\Support\ServiceProvider;
-
+use Session;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -24,5 +24,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        view()->composer('header',function($view){
+            if(Session('cart')){
+                 $oldCart = Session::get('cart');
+                 $cart = new Cart($oldCart);
+                 $view->with(['cart'=>Session::get('cart'),'product_cart'=>$cart->items,'totalPrice'=> $cart->totalPrice,'totalQty'=> $cart->totalQty]);
+              }
+          });
     }
 }

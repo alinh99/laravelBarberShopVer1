@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\AdminProduct;
 use App\Icon;
 use App\product;
+use App\Cart;
 use Illuminate\Http\Request;
 use App\Slide;
+use Session;
 class PageController extends Controller
 {
     //
@@ -58,7 +60,7 @@ class PageController extends Controller
         return $this->getIndexAdmin();
     }
 
-    
+
     public function getAdminEdit($id){
         $product = product::find($id);
         return view('Admin.formEdit')->with(['product'=>$product]);
@@ -79,5 +81,14 @@ class PageController extends Controller
         $product->price = $request->price;
         $product->save();
         return $this->getIndexAdmin();
+    }
+
+    public function getAddToCart(Request $req, $id){
+        $product = product::find($id);
+        $oldCart = Session('cart')?Session::get('cart'):null;
+        $cart = new Cart($oldCart);
+        $cart->add($product,$id);
+        $req->session()->put('cart', $cart);
+        return redirect()->back();
     }
 }

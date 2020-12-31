@@ -127,40 +127,13 @@
                     <h4>{{$product->price}}.000đ</h4>
                     </article>
                     @endforeach
-                    
+
             </div>
             <br>
             <br>
             <div class="row">{{$products->links()}}</div>
         </section>
-        <div class="cart-overlay">
-            <div class="cart">
-                <span class="close-cart">
-                    <i class="fas fa-window-close"></i>
-                </span>
-                <h2>Your Cart</h2>
-                <div class="cart-content">
-                    <!--cart item -->
-                    <!--end of cart item -->
-                </div>
-                <br>
-                <div class="cart-footer">
-                    <button class="clear-cart banner-btn">Xóa hết</button>
-                    <br>
-                    <br>
-                    <br>
-                    <h3>Your Total: <span class="cart-total"></span>.000đ</h3>
-                    <br>
-                    <br>
-                    <button class="banner-btn check-out-cart">Thanh Toán</button>
-                </div>
-                <br>
-                <div class="cart-fotter">
 
-                </div>
-
-            </div>
-        </div>
     </div>
 
 @endsection

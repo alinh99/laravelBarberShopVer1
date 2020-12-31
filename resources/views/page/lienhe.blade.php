@@ -1,5 +1,5 @@
 @extends('master')
-@section('content')    
+@section('content')
     <div class="container">
       <!-- Start: Contatti+gmap -->
       <div id="page" class="page">
@@ -8,32 +8,6 @@
           id="contact-section17"
         >
           <div class="container">
-            <div class="cart-overlay">
-              <div class="cart">
-                <span class="close-cart">
-                  <i class="fas fa-window-close"></i>
-                </span>
-                <h2>Your Cart</h2>
-                <div class="cart-content"></div>
-                <br />
-                <div class="cart-footer">
-                  <button class="clear-cart banner-btn">Xóa hết</button>
-                  <br />
-                  <br />
-                  <br />
-                  <h3>Your Total: <span class="cart-total"></span>.000đ</h3>
-                  <br />
-                  <br />
-                  <button
-                    class="banner-btn check-out-cart"
-                  >
-                    Thanh Toán
-                  </button>
-                </div>
-                <br />
-                <div class="cart-fotter"></div>
-              </div>
-            </div>
             <div class="row">
               <!-- section title -->
               <div class="col-md-12 col-sm-12 col-xs-12 text-center">
