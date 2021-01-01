@@ -10480,7 +10480,7 @@ body {
         transform: translate(-50%, 0)
     }
     div.alert {
-        width: 40%
+        width: 100%
     }
     .alert-col>.alert {
         padding: 10px;

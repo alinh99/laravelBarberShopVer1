@@ -265,6 +265,13 @@ body {
     margin: 1.5rem 0;
 }
 
+.link:hover,
+.link:focus {
+    text-decoration: none;
+    outline: none;
+    background-color: #fff;
+}
+
 .cart-item img {
     width: 75px;
     height: 75px;

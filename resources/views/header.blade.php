@@ -46,38 +46,10 @@
                 <span>
                     <i class="fas fa-cart-plus"></i>
                 </span>
-                <div class="cart-items">0</div>
+                <span class="cart-items">{{session()->has('cart') ? session()->get('cart')->totalQty : '0'}}</span>
             </li>
+
         </ul>
-        <div class="cart-overlay">
-            {{-- @if(Session::has('cart')) --}}
-            <div class="cart">
-                <span class="close-cart">
-                    <i class="fas fa-window-close"></i>
-                </span>
-                <h2>Your Cart</h2>
-                <div class="cart-content">
-                    <!--cart item -->
-                    <!--end of cart item -->
-                </div>
-                <br>
-                <div class="cart-footer">
-                    <button class="clear-cart banner-btn">Xóa hết</button>
-                    <br>
-                    <br>
-                    <br>
-                    <h3>Your Total: <span class="cart-total"></span>.000đ</h3>
-                    <br>
-                    <br>
-                    <button class="banner-btn check-out-cart">Thanh Toán</button>
-                </div>
-                <br>
-                <div class="cart-fotter">
-
-                </div>
-
-            </div>
-        </div>
     </div>
 </div>
 <!-- End: Article Header 1 -->

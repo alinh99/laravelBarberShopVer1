@@ -56,14 +56,14 @@
         <!-- Start: --mp-- Multiple items slider responsive -->
         <section style="margin-top: 20px;">
             <div class="d-flex flex-row multiple-item-slider">
-                @foreach($slide_second as $sl_second)
-                <div class="justify-content-center spacer-slider">
-                    <figure class="figure">
-                        <a href="{{route('trang-chu')}}"><img class="img-fluid figure-img" src="assets/img/{{$sl_second->image}}"
-                                alt="alt text here" /></a>
-                        <figcaption class="figure-caption">{{$sl_second->name}}</figcaption>
-                    </figure>
-                </div>
+                @foreach ($slide_second as $sl_second)
+                    <div class="justify-content-center spacer-slider">
+                        <figure class="figure">
+                            <a href="{{ route('trang-chu') }}"><img class="img-fluid figure-img"
+                                    src="assets/img/{{ $sl_second->image }}" alt="alt text here" /></a>
+                            <figcaption class="figure-caption">{{ $sl_second->name }}</figcaption>
+                        </figure>
+                    </div>
                 @endforeach
             </div>
         </section>
@@ -75,65 +75,109 @@
             <div id="recipeCarousel" class="carousel slide w-100" data-ride="carousel">
                 <div class="carousel-inner w-100" role="listbox">
                     <div class="carousel-item row no-gutters active" style="background-color: #fbf4f4;">
-                        @foreach($icons as $icon)
-                        <div class="col-3 float-left">
-                            <img class="img-fluid" src="assets/img/{{$icon->image}}" style="background-color: #fbf4f4;" />
-                            <h5>{{$icon->title}}</h5>
-                            <p>{{$icon->description}}</p>
-                        </div>
+                        @foreach ($icons as $icon)
+                            <div class="col-3 float-left">
+                                <img class="img-fluid" src="assets/img/{{ $icon->image }}"
+                                    style="background-color: #fbf4f4;" />
+                                <h5>{{ $icon->title }}</h5>
+                                <p>{{ $icon->description }}</p>
+                            </div>
                         @endforeach
                     </div>
                     <!--             <div class="carousel-item row no-gutters">
-                  <div class="col-3 float-left"><img class="img-fluid" src=""></div>
-                  <div class="col-3 float-left"><img class="img-fluid" src=""></div>
-                  <div class="col-3 float-left"><img class="img-fluid" src=""></div>
-                  <div class="col-3 float-left"><img class="img-fluid" src=""></div> -->
+                                  <div class="col-3 float-left"><img class="img-fluid" src=""></div>
+                                  <div class="col-3 float-left"><img class="img-fluid" src=""></div>
+                                  <div class="col-3 float-left"><img class="img-fluid" src=""></div>
+                                  <div class="col-3 float-left"><img class="img-fluid" src=""></div> -->
                 </div>
             </div>
             <!--         <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-          </a> -->
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Previous</span>
+                          </a>
+                          <a class="carousel-control-next" href="#recipeCarousel" role="button" data-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="sr-only">Next</span>
+                          </a> -->
         </div>
         <!-- End: Multiple Slides - Bootstrap 4 -->
     </div>
     <div class="container">
         <h1 class="text-center align-content-center" style="
-            background-color: #fbf4f4;
-            color: rgb(0, 0, 0);
-            font-family: Aldrich, sans-serif;
-          ">
+                            background-color: #fbf4f4;
+                            color: rgb(0, 0, 0);
+                            font-family: Aldrich, sans-serif;
+                          ">
             SẢN PHẨM HOT<br />
         </h1>
         <hr />
     </div>
+
     <div class="container">
+        @if (session()->has('success'))
+            <div class="alert alert-success">{{ session()->get('success') }}</div>
+        @endif
         <section class="products">
             <div class="products-center">
-                @foreach($products as $product)
-                <article class="product">
-                    <div class="img-container">
-                        <img src="assets/img/{{$product->image}}" alt="product" class="product-img"/>
-                        <button class="bag-btn" data-id={{$product->id}}>
-                      <i class="fas fa-shopping-cart"></i>
-                      Thêm vào giỏ hàng
-                    </button>
-                    </div>
-                    <h3>{{$product->title}}</h3>
-                    <h4>{{$product->price}}.000đ</h4>
+                @foreach ($products as $product)
+                    <article class="product">
+                        <div class="img-container">
+                            <img src="assets/img/{{ $product->image }}" alt="product" class="product-img" />
+                            <button class="bag-btn" data-id={{ $product->id }}>
+                                <a href="{{ route('themgiohang', $product->id) }}"><i class="fas fa-shopping-cart"></i>Thêm vào giỏ
+                                    hàng</a>
+                                {{-- <i class="fas fa-shopping-cart"></i>
+                                Thêm vào giỏ hàng --}}
+                            </button>
+                        </div>
+                        <h3>{{ $product->title }}</h3>
+                        <h4>{{ number_format($product->price) }} đồng</h4>
                     </article>
-                    @endforeach
-
+                @endforeach
             </div>
             <br>
             <br>
-            <div class="row">{{$products->links()}}</div>
+            <div class="row">{{ $products->links() }}</div>
         </section>
+        <div class="cart-overlay transparentBcg">
+            <div class="cart">
+                <span class="close-cart">
+                    <i class="fas fa-window-close"></i>
+                </span>
+                <h2>Your Cart</h2>
+                <div class="cart-content">
+                    <!--cart item -->
+                    {{-- <div class="cart-item">
+                        <img src=${item.image} alt="products" />
+                        <div>
+                            <h4>${item.title}</h4>
+                            <h5>${item.price}.000đ</h5>
+                            <span class="remove-item" data-id=${item.id}>Xóa</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-chevron-up" data-id=${item.id}></i>
+                            <p class="item-amount">${item.amount}</p>
+                            <i class="fas fa-chevron-down" data-id=${item.id}></i>
+                        </div>
+                    </div> --}}
+                    <br>
+                    <div class="cart-footer">
+                        <button class="clear-cart banner-btn">Xóa hết</button>
+                        <br>
+                        <br>
+                        <br>
+                        <h3>Your Total: <span class="cart-total"></span>.000đ</h3>
+                        <br>
+                        <br>
+                        <button class="banner-btn check-out-cart">Thanh Toán</button>
+                    </div>
+                    <br>
+                    <!--end of cart item -->
+                </div>
 
+            </div>
+        </div>
+    </div>
     </div>
 
 @endsection

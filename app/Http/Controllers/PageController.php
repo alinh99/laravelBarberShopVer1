@@ -19,7 +19,12 @@ class PageController extends Controller
         $products = product::where('id','>',0)->paginate(3);
         // dd($products);
         $new_products = AdminProduct::all();
-        return view('page.trangchu',compact('slides', 'slide_second', 'icons','products','new_products'));
+        if (session()->has('cart')) {
+            $oldCart = new Cart(session()->get('cart'));
+        }else{
+            $oldCart = null;
+        }
+        return view('page.trangchu',compact('slides', 'slide_second', 'icons','products','new_products', 'oldCart'));
     }
 
     public function getLienHe(){
@@ -85,10 +90,22 @@ class PageController extends Controller
 
     public function getAddToCart(Request $req, $id){
         $product = product::find($id);
-        $oldCart = Session('cart')?Session::get('cart'):null;
+        $oldCart = Session('cart')?session()->get('cart'):null;
         $cart = new Cart($oldCart);
         $cart->add($product,$id);
         $req->session()->put('cart', $cart);
         return redirect()->back();
     }
+
+    // public function getAddToCart(product $product){
+    //     if(session()->has('cart')){
+    //         $oldCart = new Cart(session()->get('cart'));
+    //     }else{
+    //         $oldCart = new Cart();
+    //     }
+    //     $oldCart->add($product);
+    //     // dd($oldCart);
+    //     session()->put('cart',$oldCart);
+    //     return redirect()->route('trang-chu')->with('success','Product was added');
+    // }
 }

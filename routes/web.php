@@ -61,12 +61,21 @@ Route::post('admin-delete/{id}',[
 ]);
 
 
-Route::get('add-to-cart/{id}',[
+Route::get('add/{id}',[
 	'as'=>'themgiohang',
 	'uses'=>'PageController@getAddtoCart'
 ]);
 
-Route::get('del-cart/{id}',[
-	'as'=>'xoagiohang',
-	'uses'=>'PageController@getDelItemCart'
-]);
+// Route::get('/addToCart/{product}', 'PageController@getAddToCart')->name('cart.add');
+// Route::get('/shopping-cart', 'PageController@showCart')->name('cart.show');
+
+// Route::get('/add','PageController@getAddToCart')->name('cart.add');
+
+// Route::get('del-cart/{id}',[
+// 	'as'=>'xoagiohang',
+// 	'uses'=>'PageController@getDelItemCart'
+// ]);
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
